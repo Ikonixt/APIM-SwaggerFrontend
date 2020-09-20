@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: multiple-domain-swagger-ui-service
+  labels:
+    app: multiple-domain-swagger-ui
+spec:
+  selector:
+    app: multiple-domain-swagger-ui
+  type: NodePort
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80

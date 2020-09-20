@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-multiple-domain-swagger-ui
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /SwaggerUI/$2
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "12h"
+    nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
+spec:
+  tls:
+    - hosts:
+      - uat.10.100.60.217.nip.io
+      secretName: tls-uat.10.100.60.217.nip.io
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: multiple-domain-swagger-ui-service
+          servicePort: 80
+        path: /SwaggerUI(/|$)(.*)
+  - host: uat.10.100.60.217.nip.io
+    http:
+      paths:
+      - backend:
+          serviceName: multiple-domain-swagger-ui-service
+          servicePort: 80
+        path: /SwaggerUI(/|$)(.*)

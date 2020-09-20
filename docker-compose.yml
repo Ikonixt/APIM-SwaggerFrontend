@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  swagger_ui:
+    container_name: swagger_ui
+    image: swagger_ui_img:swagger
+    build: .
+    ports:
+      - "8081:80"
